@@ -10,10 +10,31 @@ var Handlebars = require("handlebars");
 var fs = require("fs");
 var  moment = require("moment");
 var tools = require("./tools.js");
+var request = require("request");
+
 
 //////////////////////////////////////////////////////////////////////////////
+initView();
 initReportsLists();
-initMessenger();
+testNetwork();
+
+//////////////////////////////////////////////////////////////////////////////
+function initView() {
+    $("#console").hide();
+    Messenger.options = {
+        theme: 'flat'
+    };
+}
+
+//////////////////////////////////////////////////////////////////////////////
+function testNetwork() {
+    console("testing network ...");
+    request("http://feeds.wired.com/wired/index", function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console(body);
+        }
+    });
+}
 
 //////////////////////////////////////////////////////////////////////////////
 function initReportsLists() {
@@ -129,6 +150,12 @@ function prospectus(reportName, report) {
     });
 }
 
+//////////////////////////////////////////////////////////////////////////////
+function console(text) {
+    $("#console").fadeIn();
+    $("#console").html(text);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 function setReportName(category, reportName) {
     $("#report-name").html(category + "/" + reportName);
@@ -148,11 +175,4 @@ function error(text) {
         message: text,
         type: "error"
     });
-}
-
-////////////////////////////////////////////////////////////////////////////////
-function initMessenger() {
-    Messenger.options = {
-        theme: 'flat'
-    };
 }

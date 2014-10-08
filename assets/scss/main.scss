@@ -25,6 +25,11 @@ html,body {
     font-size:10px;
 }
 
+.well {
+    word-break: always;
+    overflow: hidden;
+}
+
 header {
     position:fixed;
     background-color:#ffffff;

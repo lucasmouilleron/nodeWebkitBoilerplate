@@ -8,6 +8,7 @@ Architecture
 - `package.json` : node webkit manifest
 - `build` : grunt builder
 - `assets` : app assets (css + images)
+- `nw.app` and `nw.exe` are the Node webKit binaries
 
 Install
 -------
