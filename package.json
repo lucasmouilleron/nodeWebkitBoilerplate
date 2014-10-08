@@ -13,9 +13,7 @@
   "devDependencies": {
     "fs": "0.0.2",
     "handlebars": "^2.0.0",
-    "highcharts-browserify": "^0.1.1-4.0.3",
     "jquery": "^2.1.1",
-    "moment": "^2.8.3",
-    "requirejs": "^2.1.15"
+    "moment": "^2.8.3"
   }
 }
