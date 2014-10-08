@@ -7,22 +7,40 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
     cfg: grunt.file.readJSON("config.json"),
-    webDir:"../",
+    distDir: "../dist",
+    macBin: "node-webkit.app",
     availabletasks: {
       tasks: {
         options: {
           sort: true,
           filter: "include",
-          tasks: ["default","intro","cleanup","speed","compile:images","watch","build", "compile:styles", "watch:styles"]
+          tasks: ["default","intro","cleanup","speed","compile:images","watch","package", "compile:styles", "watch:styles", "run"]
         }
       }
     },
-    nodewebkit: {
+    copy: {
       options: {
-        platforms: ["osx"],
-        buildDir: "../dist",
+        mode: true
       },
-      src: ["../app/**/*","../assets/**/*","../node_modules","../data/**/*","../package.json","../index.html"]
+      main: {
+        files: [
+        {src: "../app/**", dest: "<%=distDir%>/app/"},
+        {src: "../assets/**", dest: "<%=distDir%>/assets/"},
+        {src: "../node_modules/**", dest: "<%=distDir%>/node_modules/"},
+        {src: "../index.html", dest: "<%=distDir%>/index.html"},
+        {src: "../package.json", dest: "<%=distDir%>/package.json"},
+        ]
+      },
+      mac: {
+        files: [
+        {src: "../<%=macBin%>/**", dest: "<%=distDir%>/<%=macBin%>/"},
+        ]
+      }
+    },
+    exec: {
+      runmac: {
+        command: 'open -n ../<%=macBin%> "../"'
+      }
     },
     compass: {
       compile: {
@@ -77,12 +95,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-compass");
   grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks("grunt-autoprefixer");
-  grunt.loadNpmTasks("grunt-node-webkit-builder");
+  grunt.loadNpmTasks("grunt-contrib-copy");
+  grunt.loadNpmTasks("grunt-exec");
 
   /////////////////////////////////////////////////////////////////////////
   grunt.registerTask("default", "These help instructions",["availabletasks"]);
   grunt.registerTask("cleanup", "Clean project",["clean:default"]);
   grunt.registerTask("watch:styles", "Compile sass files",["watch:sass"]);
   grunt.registerTask("compile:styles", "Watch and compile sass files",["compass:compile","autoprefixer"]);
-  grunt.registerTask("build", "Build all",["compile:styles", "compress:build","copy:prebuild","copy:build", "cleanup"]);
+  grunt.registerTask("run:mac", "Run the app on Mac Os",["exec:runmac"]);
+  grunt.registerTask("package:mac", "Package the app",["compile:styles","copy:main","copy:mac"]);
 };

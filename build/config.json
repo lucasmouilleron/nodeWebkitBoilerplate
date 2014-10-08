@@ -6,5 +6,5 @@
   "cssDir":"../assets/css",
   "imgDir": "../assets/img",
   "fontsDir": "../assets/fonts",
-  "cleanFiles":[" ../dist/app.nw"]
+  "cleanFiles":[" ../dist"]
 }

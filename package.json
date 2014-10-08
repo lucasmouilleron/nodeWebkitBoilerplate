@@ -1,7 +1,6 @@
 {
   "name": "TSReportViewer",
   "main": "app/index.html",
-  "version": 1.0,
   "window": {
     "title": "TSReportViewer",
     "icon": "assets/img/favicon.png",
