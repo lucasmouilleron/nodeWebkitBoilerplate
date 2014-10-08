@@ -1,5 +1,4 @@
-A node webkit test
+A Node WebKit test.
+Running HTML5/JS/CSS apps on the desktop.
 
-- grunt
-- run
-- package
+The test includes a grunt builder and a demo app.
