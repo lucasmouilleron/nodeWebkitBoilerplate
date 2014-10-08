@@ -1,1 +1,0 @@
-compass watch -c _dev/compass.rb
