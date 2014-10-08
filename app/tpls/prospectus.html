@@ -1,0 +1,315 @@
+<!--<h1>Prospectus {{name}}</h1>-->
+
+<!-- /////////////////////////////////////////////////////////////////////// -->
+<div class="row">
+    <div class="col-md-6">
+        <h2>Trade by trade analysis</h2>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Param</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td># Trades completed <small>(long/short)</small></td>
+                    <td>{{globalTradeAnalysis.nTradesCompleted}} <small>({{globalTradeAnalysis.nTradesLong}} / {{globalTradeAnalysis.nTradesShort}})</small></td>
+                </tr>
+                <tr>
+                    <td>Mean gross return <small>(%)</small></td>
+                    <td>{{globalTradeAnalysis.avGrossReturn}} <small>+- {{globalTradeAnalysis.errorOnAvGrossReturn}}</small></td>
+                </tr>
+                <tr>
+                    <td>Mean gross return Long/Short <small>(%)</small></td>
+                    <td>{{globalTradeAnalysis.avGrossReturnLong}} / {{globalTradeAnalysis.avGrossReturnShort}}</td>
+                </tr>
+                <tr>
+                    <td>Mean net return <small>(%)</small></td>
+                    <td>{{globalTradeAnalysis.avNetReturn}} <small>+- {{globalTradeAnalysis.errorOnAvNetReturn}}</small></td>
+                </tr>
+                <tr>
+                    <td>Min/Max return distribution <small>(%)</small></td>
+                    <td>{{globalTradeAnalysis.minTradeReturn}} / {{globalTradeAnalysis.maxTradeReturn}}</td>
+                </tr>
+                <tr>
+                    <td>Win/Loss fraction <small>(%)</small></td>
+                    <td>{{globalTradeAnalysis.winTradesPercent}} / {{globalTradeAnalysis.lossTradesPercent}}</td>
+                </tr>
+                <tr>
+                    <td>Avg. holding period <small>(minutes)</small></td>
+                    <td>{{globalTradeAnalysis.avHoldingTime}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h2>Execution analysis</h2>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Param</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Transaction Entry Cost -> all fees <small>(%)</small></td>
+                    <td>{{globalTradeAnalysis.transactionEntryCost}}</td>
+                </tr>
+                <tr>
+                    <td>Transaction Exit Cost -> all fees <small>(%)</small></td>
+                    <td>{{globalTradeAnalysis.transactionExitCost}}</td>
+                </tr>
+                <tr>
+                    <td>Execution Entry Cost -> liquidity+impact+slippage <small>(%)</small></td>
+                    <td>{{globalTradeAnalysis.executionEntryCost}}</td>
+                </tr>
+                <tr>
+                    <td>Execution Exit Cost -> liquidity+impact+slippage <small>(%)</small></td>
+                    <td>{{globalTradeAnalysis.executionExitCost}}</td>
+                </tr>
+                <tr>
+                    <td>Opportunity Cost <small>(%)</small></td>
+                    <td>{{globalTradeAnalysis.opportunityCost}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- /////////////////////////////////////////////////////////////////////// -->
+<div class="row">
+    <div class="col-md-6">
+        <h2>Risk  / return daily analysis</h2>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Param</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Annualized Net Return <small>(%)</small></td>
+                    <td>{{annualizedNetReturn}}</td>
+                </tr>
+                <tr>
+                    <td>Mean /SDev daily returns<small>(%)</small></td>
+                    <td>{{avgDailyNetReturn}} / {{sdevDailyNetReturn}}</td>
+                </tr>
+                <tr>
+                    <td>Min/Max daily returns <small>(%)</small></td>
+                    <td>{{minDailyReturn}} / {{maxDailyReturn}}</td>
+                </tr>
+                <tr>
+                    <td>Win/Loss/Null days <small>(%)</small></td>
+                    <td>{{fractionWinDays}} / {{fractionLossDays}} / {{fractionNullDays}}</td>
+                </tr>
+                <tr>
+                    <td>Daily VaR 95%</td>
+                    <td>{{daily95VaR}}</td>
+                </tr>
+                <tr>
+                    <td>Daily conditionnal VaR 95%</td>
+                    <td>{{daily95conditionalVaR}}</td>
+                </tr>
+                <tr>
+                    <td>Maximum Drawdown <small>(peak-valley)</small></td>
+                    <td>{{maximumDrawdown}} <small>({{maximumDrawdownPeak}}-{{maximumDrawdownValley}})</small></td>
+                </tr>
+                <tr>
+                    <td>Maximum Drawdown Duration <small>(days)</small></td>
+                    <td>{{maximumDrawdownDuration}}</td>
+                </tr>
+                <tr>
+                    <td>Sharpe Ratio <small>(annualized)</small></td>
+                    <td>{{sharpeRatioAnnualized}}</td>
+                </tr>
+                <tr>
+                    <td>Sortino Ratio <small>(annualized)</small></td>
+                    <td>{{sortinoRatioAnnualized}}</td>
+                </tr>
+                <tr>
+                    <td>Calmar Ratio <small>(annualized)</small></td>
+                    <td>{{calmarRatioAnnualized}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h2>TODO</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Param</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Transaction Entry Cost -> all fees <small>(%)</small></td>
+                    <td>{{globalTradeAnalysis.transactionEntryCost}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- /////////////////////////////////////////////////////////////////////// -->
+<div class="row">
+    <div class="col-md-12">
+        <h2>Risk  / return monthly analysis</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Param</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mean/SDev monthly returns <small>(%)</small></td>
+                    <td>{{avgMonthlyNetReturn}} / {{sdevMonthlyNetReturn}}</td>
+                </tr>
+                <tr>
+                    <td>Min/Max monthly returns <small>(%)</small></td>
+                    <td>{{minMonthlyReturn}} / {{maxMonthlyReturn}}</td>
+                </tr>
+                <tr>
+                    <td>Win/Loss/Null months <small>(%)</small></td>
+                    <td>{{minDailyReturn}} / {{maxDailyReturn}}</td>
+                </tr>
+                <tr>
+                    <td>Win/Loss/Null days <small>(%)</small></td>
+                    <td>{{fractionWinMonths}} / {{fractionLossMonths}} / {{fractionNullMonths}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    {{#monthlyIndexDate}}
+                    <th>{{.}}</th>
+                    {{/monthlyIndexDate}}
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {{#monthlyNetReturns}}
+                    <td>{{precision3 .}}</td>
+                    {{/monthlyNetReturns}}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- /////////////////////////////////////////////////////////////////////// -->
+<div class="row">
+    <div class="col-md-12">
+        <h2>Exchange breakdown</h2>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Exchange</th>
+                    <th>Mean net return</th>
+                    <th>Exec cost entry</th>
+                    <th>Exec cost exit</th>
+                    <th>Opportunity cost</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {{#exchangeBreakdownIndex}}
+                <tr>
+                    <td>{{.}}</td>
+                    <td>{{lookupField ../exchangeBreakdown @index "avNetReturn"}} <small>+- {{lookupField ../exchangeBreakdown @index "errorOnAvNetReturn"}}</small></td>
+                    <td>{{lookupField ../exchangeBreakdown @index "executionEntryCost"}}</td>
+                    <td>{{lookupField ../exchangeBreakdown @index "executionExitCost"}}</td>
+                    <td>{{lookupField ../exchangeBreakdown @index "opportunityCost"}}</td>
+                </tr>
+                {{/exchangeBreakdownIndex}}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- /////////////////////////////////////////////////////////////////////// -->
+<div class="row">
+    <div class="col-md-12">
+        <h2>Sector breakdown</h2>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Sector</th>
+                    <th>Mean net return</th>
+                    <th>Exec cost entry</th>
+                    <th>Exec cost exit</th>
+                    <th>Opportunity cost</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {{#sectorBreakdownIndex}}
+                <tr>
+                    <td>{{.}}</td>
+                    <td>{{lookupField ../sectorBreakdown @index "avNetReturn"}} <small>+- {{lookupField ../sectorBreakdown @index "errorOnAvNetReturn"}}</small></td>
+                    <td>{{lookupField ../sectorBreakdown @index "executionEntryCost"}}</td>
+                    <td>{{lookupField ../sectorBreakdown @index "executionExitCost"}}</td>
+                    <td>{{lookupField ../sectorBreakdown @index "opportunityCost"}}</td>
+                </tr>
+                {{/sectorBreakdownIndex}}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- /////////////////////////////////////////////////////////////////////// -->
+<div class="row">
+    <div class="col-md-12">
+        <h2>Liquidity breakdown</h2>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Liquidity</th>
+                    <th>Mean net return</th>
+                    <th>Exec cost entry</th>
+                    <th>Exec cost exit</th>
+                    <th>Opportunity cost</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {{#liquidityBreakdownIndex}}
+                <tr>
+                    <td>{{.}}</td>
+                    <td>{{lookupField ../liquidityBreakdown @index "avNetReturn"}} <small>+- {{lookupField ../liquidityBreakdown @index "errorOnAvNetReturn"}}</small></td>
+                    <td>{{lookupField ../liquidityBreakdown @index "executionEntryCost"}}</td>
+                    <td>{{lookupField ../liquidityBreakdown @index "executionExitCost"}}</td>
+                    <td>{{lookupField ../liquidityBreakdown @index "opportunityCost"}}</td>
+                </tr>
+                {{/liquidityBreakdownIndex}}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- /////////////////////////////////////////////////////////////////////// -->
+<div class="row">
+    <div class="col-md-12">
+        <h2>Net returns</h2>
+        <div id="chart-example"></div>
+    </div>
+</div>

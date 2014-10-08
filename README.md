@@ -8,8 +8,8 @@ TODO REDO WITH SLFSRV
 Install
 -------
 - `git@github.com:lucasmouilleron/TSReportViewer.git`
-- Download `slfsrv` Mac OS binary : https://github.com/BrentNoorda/slfsrv#getting-the-sourceexecutable-files
-- `sudo cp sflsrv /usr/bin/slfsrv`
+- Download `node-webkit` OS target binary (Mac OS binary is embeded) : https://github.com/rogerwang/node-webkit#downloads
+- And place it at the project root
 
 Compile
 -------
@@ -18,5 +18,7 @@ Compile
 
 Run
 ---
-- production mode : `slfsrv PATH/TO/TSReportViewer/index.html`
-- debug mode : `slfsrv PATH/TO/TSReportViewer/index-debug.html`
+- `open -n -a node-webkit "./"`
+- debug : 
+    - edit `package.json`
+    - change `window->toolbar` to true

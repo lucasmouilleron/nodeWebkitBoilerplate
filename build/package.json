@@ -7,10 +7,8 @@
     "grunt-available-tasks": "^0.5.0",
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-compass": "^0.8.0",
-    "grunt-contrib-imagemin": "^0.7.1",
-    "grunt-contrib-requirejs": "^0.4.4",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-grunticon": "^1.2.9",
-    "grunt-svgmin": "^0.4.0"
+    "grunt-node-webkit-builder": "^0.2.3",
+    "mkdirp": "^0.5.0"
   }
 }

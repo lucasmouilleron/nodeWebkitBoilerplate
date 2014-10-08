@@ -1,5 +1,8 @@
 module.exports = function(grunt) {
 
+  var mkdirp = require("mkdirp");
+  mkdirp("../dist");
+
   /////////////////////////////////////////////////////////////////////////
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
@@ -10,19 +13,16 @@ module.exports = function(grunt) {
         options: {
           sort: true,
           filter: "include",
-          tasks: ["default","intro","cleanup","speed","compile:images","watch","build","watch:scripts", "compile:scripts", "compile:styles", "watch:styles"]
+          tasks: ["default","intro","cleanup","speed","compile:images","watch","build", "compile:styles", "watch:styles"]
         }
       }
     },
-    requirejs: {
-      compile: {
-        options: {
-          baseUrl: "<%=cfg.jsDir%>",
-          mainConfigFile: "<%=cfg.jsMainFile%>",
-          name: "<%=cfg.jsMainName%>",
-          out: "<%=cfg.jsMinFile%>"
-        }
-      }
+    nodewebkit: {
+      options: {
+        platforms: ["osx"],
+        buildDir: "../dist",
+      },
+      src: ["../app/**/*","../assets/**/*","../node_modules","../data/**/*","../package.json","../index.html"]
     },
     compass: {
       compile: {
@@ -43,52 +43,9 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      js: {
-        files: ["<%=cfg.jsDir%>/**/*.js"],
-        tasks: ["compile:scripts"]
-      },
       sass: {
         files: ["<%=cfg.sassDir%>/**/*.scss"],
         tasks: ["compile:styles"]
-      },
-      everything: {
-        files: ["<%=cfg.sassDir%>/**/*.scss", "<%=cfg.jsDir%>/**/*.js"],
-        tasks: ["compile:scripts", "compile:styles"]
-      }
-    },
-    svgmin: {
-      default: {
-        files: [{
-          expand: true,
-          cwd: "<%=cfg.imgSrcDir%>",
-          src: ['**/*.svg'],
-          dest: "<%=cfg.imgDir%>"
-        }]
-      }
-    },
-    imagemin: {
-      default: {
-        files: [{
-          expand: true,
-          cwd: "<%=cfg.imgSrcDir%>",
-          src: ["**/*.{png,jpg,gif}"],
-          dest: "<%=cfg.imgDir%>"
-        }]
-      }
-    },
-    grunticon: {
-      default: {
-        files: [{
-          expand: true,
-          cwd:"<%=cfg.iconsDir%>",
-          src: ['*.svg', '*.png'],
-          dest: "<%=cfg.imgDir%>/icons"
-        }],
-        options: {
-          datasvgcss: "icons.css",
-          datapngcss: "icons.png.css",
-          previewhtml: "icons.preview.html"
-        }
       }
     },
     clean: {
@@ -101,38 +58,31 @@ module.exports = function(grunt) {
     },   
     autoprefixer: {
       options: {
-       browsers: ["last 2 version"]
-     },
-     default: {
-       files: [{
-        expand: true, 
-        cwd: "<%=cfg.cssDir%>/",
-      src: "{,*/}*.css",
-      dest: "<%=cfg.cssDir%>/"
-    }]
+        browsers: ["last 2 version"]
+      },
+      default: {
+        files: [{
+          expand: true, 
+          cwd: "<%=cfg.cssDir%>/",
+        src: "{,*/}*.css",
+        dest: "<%=cfg.cssDir%>/"
+      }]
+    }
   }
-}
 });
 
   /////////////////////////////////////////////////////////////////////////
   grunt.loadNpmTasks("grunt-available-tasks");
   grunt.loadNpmTasks("grunt-contrib-watch");
-  grunt.loadNpmTasks("grunt-contrib-requirejs");
   grunt.loadNpmTasks("grunt-contrib-compass");
-  grunt.loadNpmTasks("grunt-contrib-imagemin");
-  grunt.loadNpmTasks("grunt-svgmin");
-  grunt.loadNpmTasks("grunt-grunticon");
   grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks("grunt-autoprefixer");
+  grunt.loadNpmTasks("grunt-node-webkit-builder");
 
   /////////////////////////////////////////////////////////////////////////
   grunt.registerTask("default", "These help instructions",["availabletasks"]);
   grunt.registerTask("cleanup", "Clean project",["clean:default"]);
-  grunt.registerTask("watch:scripts", "Watch and compile js files",["watch:js"]);
-  grunt.registerTask("watch:all", "Watch all (scripts + styles)",["watch:everything"]);
   grunt.registerTask("watch:styles", "Compile sass files",["watch:sass"]);
-  grunt.registerTask("compile:scripts", "Compile js files",["requirejs:compile"]);
   grunt.registerTask("compile:styles", "Watch and compile sass files",["compass:compile","autoprefixer"]);
-  grunt.registerTask("build", "Build all (scripts + styles)",["compile:styles","compile:scripts", "cleanup"]);
-  grunt.registerTask("compile:images", "Optimize images and icons",["imagemin:default", "svgmin:default", "grunticon:default"]);
+  grunt.registerTask("build", "Build all",["compile:styles", "compress:build","copy:prebuild","copy:build", "cleanup"]);
 };

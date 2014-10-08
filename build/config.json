@@ -2,15 +2,9 @@
   "host":"localhost",
   "baseURL":"TSReportViewer",
   "homeURL": "http://localhost/TSReportViewer",
-  "sassDir":"../dev/scss",
-  "iconsDir":"../dev/icons",
-  "jsDir": "../dev/js",
-  "jsMainFile": "../dev/js/main.js",
-  "jsMainName": "main",
-  "jsMinFile": "../assets/js/scripts.min.js",
+  "sassDir":"../assets/scss",
   "cssDir":"../assets/css",
   "imgDir": "../assets/img",
-  "imgSrcDir": "../dev/img",
   "fontsDir": "../assets/fonts",
-  "cleanFiles":["../web/img/icons/icons.preview.html", "../delete/**/*.sql"]
+  "cleanFiles":[" ../dist/app.nw"]
 }
