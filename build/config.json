@@ -1,7 +1,4 @@
 {
-  "host":"localhost",
-  "baseURL":"TSReportViewer",
-  "homeURL": "http://localhost/TSReportViewer",
   "sassDir":"../assets/scss",
   "cssDir":"../assets/css",
   "imgDir": "../assets/img",

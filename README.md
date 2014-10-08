@@ -1,15 +1,13 @@
-TSReportViewer
+testNodeWebKit
 ==============
 
-TODO REDO WITH SLFSRV
-
-
-
-Install
--------
-- `git@github.com:lucasmouilleron/TSReportViewer.git`
-- Download `node-webkit` OS target binary (Mac OS binary is embeded) : https://github.com/rogerwang/node-webkit#downloads
-- And place it at the project root
+Architecture
+------------
+- `app` : the js app
+- `index.html` : entry point
+- `package.json` : node webkit manifest
+- `build` : grunt builder
+- `assets` : app assets (css + images)
 
 Compile
 -------
@@ -18,7 +16,11 @@ Compile
 
 Run
 ---
-- `open -n -a node-webkit "./"`
+- `cd build && grunt run:mac`
 - debug : 
     - edit `package.json`
     - change `window->toolbar` to true
+
+Package
+-------
+- `cd build && grunt package:mac`

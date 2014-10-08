@@ -14,7 +14,7 @@ module.exports = function(grunt) {
         options: {
           sort: true,
           filter: "include",
-          tasks: ["default","intro","cleanup","speed","compile:images","watch","package", "compile:styles", "watch:styles", "run"]
+          tasks: ["default","intro","cleanup","watch","package", "compile:styles", "watch:styles", "run"]
         }
       }
     },
@@ -25,6 +25,7 @@ module.exports = function(grunt) {
       main: {
         files: [
         {src: "../app/**", dest: "<%=distDir%>/app/"},
+        {src: "../data/**", dest: "<%=distDir%>/data/"},
         {src: "../assets/**", dest: "<%=distDir%>/assets/"},
         {src: "../node_modules/**", dest: "<%=distDir%>/node_modules/"},
         {src: "../index.html", dest: "<%=distDir%>/index.html"},
@@ -45,7 +46,6 @@ module.exports = function(grunt) {
     compass: {
       compile: {
         options: {
-          httpPath: "<%=cfg.baseURL%>",
           sassDir: "<%=cfg.sassDir%>",
           cssDir: "<%=cfg.cssDir%>",
           imagesDir: "<%=cfg.imgDir%>",

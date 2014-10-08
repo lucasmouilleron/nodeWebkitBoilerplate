@@ -1,8 +1,8 @@
 {
-  "name": "TSReportViewer",
+  "name": "testNodeWebKit",
   "main": "app/index.html",
   "window": {
-    "title": "TSReportViewer",
+    "title": "testNodeWebKit",
     "icon": "assets/img/favicon.png",
     "toolbar": false,
     "frame": true,
