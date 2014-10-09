@@ -1,53 +1,72 @@
+/////////////////////////////////////////////////////////////////////////
+var isWin = /^win/.test(process.platform);
+var isMac = /^darwin/.test(process.platform);
+var isLinux32 = /^linux/.test(process.platform);
+var isLinux64 = /^linux64/.test(process.platform);
+var os = "unknown";
+if (isWin)
+  os = "win";
+if (isMac)
+  os = "osx";
+if (isLinux32)
+  os = "linux32";
+if (isLinux64)
+  os = "linux64";
+
+/////////////////////////////////////////////////////////////////////////
+var exec = require("child_process").exec;
+var path = require("path");
+var currentPath = path.resolve(process.cwd(), ".");
+var nwVer = "0.10.5";
+var nwExec = "";
+if (!isMac)
+  nwExec = "cache/" + nwVer + "/" + os + "/nw.exe "+currentPath+"/../src";
+else
+  nwExec = "open -n cache/" + nwVer + "/" + os + "/node-webkit.app --args "+currentPath+"/../src";
+
+/////////////////////////////////////////////////////////////////////////
 module.exports = function(grunt) {
 
-  
-  /////////////////////////////////////////////////////////////////////////
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
     cfg: grunt.file.readJSON("config.json"),
-    distDir: "../dist",
-    macBin: "nw.app",
-    winBin: "nw.exe",
     availabletasks: {
       tasks: {
         options: {
           sort: true,
           filter: "include",
-          tasks: ["default","intro","cleanup","watch","package:mac","package:win", "compile:styles", "watch:styles", "run:mac", "run:win"]
+          tasks: ["default","cleanup","watch","package", "build", "run"]
         }
       }
     },
-    copy: {
+    shell: {
       options: {
-        mode: true
+        stdout: true,
+        stderr: true,
+        stdin: true
       },
-      main: {
-        files: [
-        {src: "../app/**", dest: "<%=distDir%>/app/"},
-        {src: "../data/**", dest: "<%=distDir%>/data/"},
-        {src: "../assets/**", dest: "<%=distDir%>/assets/"},
-        {src: "../node_modules/**", dest: "<%=distDir%>/node_modules/"},
-        {src: "../package.json", dest: "<%=distDir%>/package.json"},
-        ]
+      install: {
+        command: function() {
+          return "sudo ulimit -n 100000 && cd ../src && bower cache clean && bower install && npm install";
+        }
       },
-      mac: {
-        files: [
-        {src: "../<%=macBin%>/**", dest: "<%=distDir%>/<%=macBin%>/"},
-        ]
-      },
-      win: {
-        files: [
-        {src: "../<%=winBin%>/**", dest: "<%=distDir%>/<%=winBin%>/"},
-        ]
+      run: {
+        command: function() {
+          return nwExec;
+        }
       }
     },
-    exec: {
-      mac: {
-        command: 'open -n ../<%=macBin%> "../"'
+    nodewebkit: {
+      package: {
+        options: {
+          version: nwVer,
+          build_dir: "../releases",
+          platforms: "<%=cfg.platforms%>",
+          keep_nw: false,
+          zip: false
+        },
+        src: ["../src/**/*"]
       },
-      win: {
-        command: 'open -n ../<%=winBin%> "../"'
-      }
     },
     compass: {
       compile: {
@@ -66,51 +85,24 @@ module.exports = function(grunt) {
         }
       }
     },
-    watch: {
-      sass: {
-        files: ["<%=cfg.sassDir%>/**/*.scss"],
-        tasks: ["compile:styles"]
-      }
-    },
     clean: {
-      options: { 
-        force: true 
-      },
-      default: {
-        src: "<%=cfg.cleanFiles%>"
-      }
-    },   
-    autoprefixer: {
-      options: {
-        browsers: ["last 2 version"]
-      },
-      default: {
-        files: [{
-          expand: true, 
-          cwd: "<%=cfg.cssDir%>/",
-        src: "{,*/}*.css",
-        dest: "<%=cfg.cssDir%>/"
-      }]
+      options: { force: true },
+      stuff : ["../releases"],
     }
-  }
-});
+  });
 
   /////////////////////////////////////////////////////////////////////////
   grunt.loadNpmTasks("grunt-available-tasks");
-  grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-contrib-compass");
   grunt.loadNpmTasks("grunt-contrib-clean");
-  grunt.loadNpmTasks("grunt-autoprefixer");
-  grunt.loadNpmTasks("grunt-contrib-copy");
-  grunt.loadNpmTasks("grunt-exec");
+  grunt.loadNpmTasks("grunt-shell");
+  grunt.loadNpmTasks("grunt-node-webkit-builder");
 
   /////////////////////////////////////////////////////////////////////////
   grunt.registerTask("default", "These help instructions",["availabletasks"]);
-  grunt.registerTask("cleanup", "Clean project",["clean:default"]);
-  grunt.registerTask("watch:styles", "Compile sass files",["watch:sass"]);
-  grunt.registerTask("compile:styles", "Watch and compile sass files",["compass:compile","autoprefixer"]);
-  grunt.registerTask("run:mac", "Run the app on Mac OS",["exec:mac"]);
-  grunt.registerTask("run:win", "Run the app on Windows",["exec:win"]);
-  grunt.registerTask("package:mac", "Package the app for Mac OS",["compile:styles","copy:main","copy:mac"]);
-  grunt.registerTask("package:win", "Package the app for Windows",["compile:styles","copy:main","copy:win"]);
+  grunt.registerTask("install", "Install the app",["clean", "shell:install", "nodewebkit:package"]);
+  grunt.registerTask("package", "Package the app",["cleanup", "build", "nodewebkit:package"]);
+  grunt.registerTask("run", "Run the app",["build", "shell:run"]);
+  grunt.registerTask("cleanup", "Clean project",["clean"]);
+  grunt.registerTask("build", "Build the app",["compass:compile"]);
 };

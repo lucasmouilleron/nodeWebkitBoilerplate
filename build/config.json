@@ -1,7 +1,7 @@
 {
-  "sassDir":"../assets/scss",
-  "cssDir":"../assets/css",
-  "imgDir": "../assets/img",
-  "fontsDir": "../assets/fonts",
-  "cleanFiles":[" ../dist"]
+  "sassDir":"../src/assets/scss",
+  "cssDir":"../src/assets/css",
+  "imgDir": "../src/assets/img",
+  "fontsDir": "../src/assets/fonts",
+  "platforms":["win", "osx"]
 }

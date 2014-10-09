@@ -1,5 +1,6 @@
-/dist
-build/cache
+/releases
+/build/cache
+/src/app/vendor
 
 #################################################################################
 # miscs

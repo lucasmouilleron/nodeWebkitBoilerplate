@@ -1,0 +1,69 @@
+/*////////////////////////////////////////////////////////////////////////////*/
+@import "compass/css3";
+
+/*////////////////////////////////////////////////////////////////////////////*/
+@import "fonts";
+@import "base";
+@import "helpers";
+@import "forms";
+@import "print";
+
+/*////////////////////////////////////////////////////////////////////////////*/
+@import "../../app/vendor/bootstrap/dist/css/bootstrap.min.css";
+@import "../../app/vendor/messenger/build/css/messenger.css";
+@import "../../app/vendor/messenger/build/css/messenger-theme-flat.css";
+
+/*////////////////////////////////////////////////////////////////////////////*/
+/* CUSTOM STYLES */
+/*////////////////////////////////////////////////////////////////////////////*/
+html,body {
+    font-family:$normalFont;
+    height:100%;
+}
+
+.font {
+    font-size:10px;
+}
+
+.well {
+    word-break: always;
+    overflow: hidden;
+}
+
+header {
+    position:fixed;
+    background-color:#ffffff;
+    padding-bottom:15px;
+    width:100%;
+    @include box-shadow(#333333 2px 0px 10px);
+    z-index:998;
+}
+
+h1, h2, h3, th {
+    text-transform: capitalize;
+}
+
+.report {
+    padding-top:200px;
+    
+}
+
+input.custom-json-file {
+    display:none;
+}
+
+@media print {
+    
+    table {
+        page-break-after:always;
+    }
+    
+    header {
+        display:none;
+    }
+    
+    .report {
+        padding-top:10px;
+    }
+    
+}

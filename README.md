@@ -12,17 +12,13 @@ Architecture
 
 Install
 -------
-- `npm install` : install node modules of the app
-- `cd build && npm install` : install node modules of the builder
-
-Compile
--------
-- `grunt build`
+- `cd build`
+- `npm install` : install node modules of the builder
+- `grunt install`
 
 Run
 ---
-- `cd build && grunt run:mac`
-- `cd build && grunt run:win`
+- `cd build && grunt run`
 - debug : 
     - edit `package.json`
     - change `window->toolbar` to true
@@ -30,5 +26,4 @@ Run
 
 Package
 -------
-- `cd build && grunt package:mac`
-- `cd build && grunt package:win`
+- `cd build && grunt package`

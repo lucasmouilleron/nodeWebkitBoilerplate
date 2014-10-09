@@ -1,0 +1,20 @@
+{
+  "name": "testNodeWebKit",
+  "version": "1.0.0",
+  "description":"",
+  "main": "index.html",
+  "window": {
+    "title": "testNodeWebKit",
+    "icon": "assets/img/favicon.png",
+    "toolbar": true,
+    "frame": true,
+    "width": 1000,
+    "height": 600,
+    "position": "mouse"
+  },
+  "devDependencies": {
+    "fs": "0.0.2",
+    "request": "^2.45.0",
+    "requirejs": "^2.1.15"
+  }
+}
