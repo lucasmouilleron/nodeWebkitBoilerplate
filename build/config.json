@@ -3,5 +3,5 @@
   "cssDir":"../src/assets/css",
   "imgDir": "../src/assets/img",
   "fontsDir": "../src/assets/fonts",
-  "platforms":["win", "osx"]
+  "platforms":["osx"]
 }

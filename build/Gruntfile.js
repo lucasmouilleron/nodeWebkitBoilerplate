@@ -62,6 +62,7 @@ module.exports = function(grunt) {
           version: nwVer,
           build_dir: "../releases",
           platforms: "<%=cfg.platforms%>",
+          mac_icns: "../src/assets/img/icon.icns",
           keep_nw: false,
           zip: false
         },

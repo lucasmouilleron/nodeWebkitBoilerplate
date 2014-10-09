@@ -14,8 +14,6 @@
     "bootstrap": "~3.2.0",
     "highcharts-release": "~4.0.4",
     "moment": "~2.8.3",
-    "throbber.js": "~0.0.2",
-    "messenger": "~1.4.1",
-    "spin.js": "~2.0.1"
+    "throbber.js": "~0.0.2"
   }
 }

@@ -7,16 +7,14 @@ var PROSPECTUS_NAME = "prospectus";
 ////////////////////////////////////////////////////////////////////////////////
 requirejs.config({
     paths: {
+        "tools": "libs/tools",
         "jquery": "vendor/jquery/dist/jquery",
         "bootstrap": "vendor/bootstrap/dist/js/bootstrap.min",
         "text": "vendor/requirejs-text/text",
         "handlebars": "vendor/handlebars/handlebars",
-        "tools": "tools",
-        "messenger": "vendor/messenger/build/js/messenger",
-        "messenger-theme": "vendor/messenger/build/js/messenger-theme-flat",
         "highcharts": "vendor/highcharts-release/highcharts-all",
         "moment": "vendor/moment/moment",
-        "throbber": "vendor/throbber.js/throbber",
+        "throbber": "vendor/throbber.js/throbber"
     },
     shim: {
         "bootstrap": ["jquery"],
@@ -24,18 +22,18 @@ requirejs.config({
         "tools": ["jquery", "throbber"],
         "messenger": ["jquery"],
         "messenger-theme": ["messenger"]
-    },
-    nodeRequire: require
+    }
 });
 
 ////////////////////////////////////////////////////////////////////////////////
-requirejs(["jquery", "tools", "moment", "handlebars", "bootstrap", "messenger", "messenger-theme", "highcharts"], function($, tools, moment) {
+requirejs(["jquery", "tools", "moment", "handlebars", "bootstrap", "highcharts"], function($, tools, moment) {
 
     var fs = require("fs");
     var request = require("request");
 
     //////////////////////////////////////////////////////////////////////////////        
     $(function() {
+        tools.init();
         initReportsLists();
         testNetwork();
     });
@@ -54,7 +52,7 @@ requirejs(["jquery", "tools", "moment", "handlebars", "bootstrap", "messenger", 
         var template = Handlebars.compile(reportsListTPL);
 
         var list = fs.readdirSync(REPORTS_ROOT_FOLDER+"/"+reportType);
-        view.reports = removeWrongFiles(list);
+        view.reports = tools.removeHiddenFiles(list);
         $("#reports-lists-hook").append(template(view));
         var reportsList = $("#reports-" + reportType);
         reportsList.find(" li.list").each(function(index, element) {
@@ -85,11 +83,11 @@ requirejs(["jquery", "tools", "moment", "handlebars", "bootstrap", "messenger", 
     function processReportFile(filePath, reportName, reportCallback) {
         fs.readFile(filePath, function(err, data) {
             if(err) {
-                tools.error("Can't read report file " + filePath);
+                tools.error("Can't read report file", filePath);
                 console.log(e);
             }
             else {
-                tools.info("Report " + filePath + " loaded");
+                tools.info("Report loaded", filePath);
                 reportCallback(reportName, JSON.parse(data));
                 tools.hideMainLoader();
             }
@@ -97,20 +95,9 @@ requirejs(["jquery", "tools", "moment", "handlebars", "bootstrap", "messenger", 
     }
 
     ////////////////////////////////////////////////////////////////////////////////
-    function removeWrongFiles(listFiles) {
-        var listCleanFiles = new Array();
-        for (var i=0; i < listFiles.length; i++) {
-            if(listFiles[i].charAt(0) != ".") {
-                listCleanFiles.push(listFiles[i]);
-            }
-        }
-        return listCleanFiles;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////
     function prospectus(reportName, report) {
 
-        setReportName(PROSPECTUS_NAME, reportName);
+        $("#report-name").html(PROSPECTUS_NAME + "/" + reportName);
         Handlebars.registerHelper('precision3', function(number) {
             return parseFloat(number).toFixed(3);
         });
@@ -154,18 +141,13 @@ requirejs(["jquery", "tools", "moment", "handlebars", "bootstrap", "messenger", 
         });
     }
 
-    ////////////////////////////////////////////////////////////////////////////////
-    function setReportName(category, reportName) {
-        $("#report-name").html(category + "/" + reportName);
-    }
-
     //////////////////////////////////////////////////////////////////////////////
     function testNetwork() {
         tools.console("testing network ...");
-        request("http://feeds.wired.com/wired/index", function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                tools.console(body);
-            }
+        $.ajax({
+            url: "https://api.github.com/users/lucasmouilleron/repos",
+        }).done(function(data) {
+            tools.console(JSON.stringify(data));
         });
     }
 });

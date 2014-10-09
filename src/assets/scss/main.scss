@@ -5,7 +5,6 @@
 @import "fonts";
 @import "base";
 @import "helpers";
-@import "forms";
 @import "print";
 
 /*////////////////////////////////////////////////////////////////////////////*/
@@ -50,20 +49,4 @@ h1, h2, h3, th {
 
 input.custom-json-file {
     display:none;
-}
-
-@media print {
-    
-    table {
-        page-break-after:always;
-    }
-    
-    header {
-        display:none;
-    }
-    
-    .report {
-        padding-top:10px;
-    }
-    
 }

@@ -1,20 +1,20 @@
-testNodeWebKit
-==============
+nodeWebkitBoilerplate
+=====================
 
 Architecture
 ------------
-- `app` : the js app
-- `index.html` : entry point
-- `package.json` : node webkit manifest
+- `src` : the app
+    - `index.html` : entry point
+    - `package.json` : node webkit manifest
+    - `assets` : app assets (css + images)
+    - `app` : logic app files
 - `build` : grunt builder
-- `assets` : app assets (css + images)
-- `nw.app` and `nw.exe` are the Node webKit binaries
 
 Install
 -------
 - `cd build`
-- `npm install` : install node modules of the builder
-- `grunt install`
+- `npm install` : installs node modules of the builder
+- `grunt install` : installs the app dev kit (requires password on mac os to extend open files limit)
 
 Run
 ---
@@ -26,4 +26,5 @@ Run
 
 Package
 -------
+- config target platforms in `build/config.json` (`"platforms":["win", "osx"]`)
 - `cd build && grunt package`

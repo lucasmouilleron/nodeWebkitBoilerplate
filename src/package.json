@@ -1,12 +1,12 @@
 {
-  "name": "testNodeWebKit",
+  "name": "Node-Webkit-Boilerplate",
   "version": "1.0.0",
-  "description":"",
+  "description": "",
   "main": "index.html",
   "window": {
-    "title": "testNodeWebKit",
-    "icon": "assets/img/favicon.png",
-    "toolbar": true,
+    "title": "Node Webkit Boilerplate",
+    "icon": "assets/img/icon.png",
+    "toolbar": false,
     "frame": true,
     "width": 1000,
     "height": 600,
@@ -14,6 +14,8 @@
   },
   "devDependencies": {
     "fs": "0.0.2",
+    "node-notifier": "^4.0.2",
+    "path": "^0.4.9",
     "request": "^2.45.0",
     "requirejs": "^2.1.15"
   }

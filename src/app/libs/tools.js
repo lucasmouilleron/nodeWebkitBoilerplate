@@ -1,26 +1,31 @@
-define("tools", ["jquery", "throbber", "messenger"], function($, Throbber) {
+var notifier = require("node-notifier");
+var path = require("path");
 
-    ////////////////////////////////////////////////////////////////////////////////
-    $("#console").hide();
-    Messenger.options = {
-        theme: 'flat'
-    };
+define("tools", ["jquery", "throbber"], function($, Throbber) {
 
     return {
 
         ////////////////////////////////////////////////////////////////////////////////
-        info: function(text) {
-            Messenger().post({
-                message: text,
-                type: "info"
+        init: function() {
+            $("#console").hide();
+        },
+
+        ////////////////////////////////////////////////////////////////////////////////
+        info: function(title, message) {
+            notifier.notify({
+                "title": title,
+                "subtitle": "",
+                "message": message,
+                "icon": false
             });
         },
 
         ////////////////////////////////////////////////////////////////////////////////
-        error: function(text) {
-            Messenger().post({
-                message: text,
-                type: "error"
+        error: function(title, message) {
+            notifier.notify({
+                "title": title,
+                "message": message,
+                "icon": path.join(process.cwd(), "assets/img/icon.png")
             });
         },
 
@@ -114,6 +119,17 @@ define("tools", ["jquery", "throbber", "messenger"], function($, Throbber) {
         ////////////////////////////////////////////////////////////////////////////////
         hideMainLoader: function (callback) {
             this.hideLoaderForElement("body", callback);
+        },
+
+        ////////////////////////////////////////////////////////////////////////////////
+        removeHiddenFiles: function (listFiles) {
+            var listCleanFiles = new Array();
+            for (var i=0; i < listFiles.length; i++) {
+                if(listFiles[i].charAt(0) != ".") {
+                    listCleanFiles.push(listFiles[i]);
+                }
+            }
+            return listCleanFiles;
         }
     }
 });
