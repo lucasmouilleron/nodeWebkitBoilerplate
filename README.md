@@ -31,5 +31,5 @@ Package
 
 Thanks
 ------
-Thanks to the Node Webkit team @ https://github.com/rogerwang/node-webkit
-Thanks to Joel Grenon for https://github.com/jgrenon/angular-desktop-app
+- Thanks to the Node Webkit team @ https://github.com/rogerwang/node-webkit
+- Thanks to Joel Grenon for https://github.com/jgrenon/angular-desktop-app
