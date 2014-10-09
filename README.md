@@ -12,6 +12,9 @@ Architecture
 
 Install
 -------
+- Install NodeJS : http://nodejs.org/download
+- `sudo npm install bower -g`
+- `sudo npm install grunt -g`
 - `cd build`
 - `npm install` : installs node modules of the builder
 - `grunt install` : installs the app dev kit (requires password on mac os to extend open files limit)
