@@ -28,3 +28,8 @@ Package
 -------
 - config target platforms in `build/config.json` (`"platforms":["win", "osx"]`)
 - `cd build && grunt package`
+
+Thanks
+------
+Thanks to the Node Webkit team @ https://github.com/rogerwang/node-webkit
+Thanks to Joel Grenon for https://github.com/jgrenon/angular-desktop-app
