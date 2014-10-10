@@ -15,27 +15,19 @@
 </head>
 <body id="body">
 
-
     <!-- /////////////////////////////////////////////////////////////// -->
-    <header>
-        <div class="container">
-            <div class="page-header">
-                <h1>Test Node WebKit Reports Viewer <small><span id="report-name"></span></small></h1>
-            </div>
-
-            <div class="reports-lists" id="reports-lists-hook"></div>
+    <div id="splash">
+        <div id="splashed">
+            <img src="assets/img/splash.png"/>
+            <p>Node Webkit Boiler Plate</p>
         </div>
-    </header>
-
-    <!-- /////////////////////////////////////////////////////////////// -->
-    <div class="container">
-        <div class="report" id="report-hook">Select a report above !</div>
-        <hr/>
-        <div class="well" id="console" style="display:none"></div>
     </div>
 
     <!-- /////////////////////////////////////////////////////////////// -->
-     <script data-main="app/main" src="app/vendor/requirejs/require.js"></script>
+    <div id="main-hook"></div>
+
+    <!-- /////////////////////////////////////////////////////////////// -->
+    <script data-main="app/main" src="app/vendor/requirejs/require.js"></script>
 
 </body>
 </html>

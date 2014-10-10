@@ -22,15 +22,24 @@ Install
 Run
 ---
 - `cd build && grunt run`
-- debug : 
-    - edit `package.json`
-    - change `window->toolbar` to true
-    - then `run` and click on the `gear`
+- Debug : 
+    - Edit `package.json`
+    - Change `window->toolbar` to true
+    - Then `run` and click on the `gear`
 
 Package
 -------
-- config target platforms in `build/config.json` (`"platforms":["win", "osx"]`)
+- Config target platforms in `build/config.json` (`"platforms":["win", "osx"]`)
 - `cd build && grunt package`
+
+Demo app specific operations
+----------------------------
+- Add a node module from npm :
+    - `cd src && npm install the_module --save-dev`
+    - Then, use with `require("the_module")` in the app code
+- Add a requirejs module from bower :
+    - `cd src && bower install the_module --save`
+    - Then, add path to `js/vendor/the_module/path/to/jsFile` in `app/main.js` in path section and include module name in the `requirejs` call
 
 Thanks
 ------

@@ -9,8 +9,6 @@
 
 /*////////////////////////////////////////////////////////////////////////////*/
 @import "../../app/vendor/bootstrap/dist/css/bootstrap.min.css";
-@import "../../app/vendor/messenger/build/css/messenger.css";
-@import "../../app/vendor/messenger/build/css/messenger-theme-flat.css";
 
 /*////////////////////////////////////////////////////////////////////////////*/
 /* CUSTOM STYLES */
@@ -18,6 +16,7 @@
 html,body {
     font-family:$normalFont;
     height:100%;
+    position:relative;
 }
 
 .font {
@@ -28,6 +27,36 @@ html,body {
     word-break: always;
     overflow: hidden;
 }
+
+#splash {
+    position:fixed;
+    width:100%;
+    height:100%;
+    background-color:#333;
+    z-index: 999;
+    text-align: center;
+    color:#fff;
+
+    &:before {
+        content: ' ';
+        display: inline-block;
+        vertical-align: middle; 
+        height: 100%;
+    }
+
+    #splashed {
+        display: inline-block;
+        vertical-align: middle; 
+
+        img {
+            max-width: 200px;
+            display:block;
+            margin-bottom:10px;
+        }
+    }
+}
+
+
 
 header {
     position:fixed;

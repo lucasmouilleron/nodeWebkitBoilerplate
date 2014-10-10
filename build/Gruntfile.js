@@ -4,25 +4,19 @@ var isMac = /^darwin/.test(process.platform);
 var isLinux32 = /^linux/.test(process.platform);
 var isLinux64 = /^linux64/.test(process.platform);
 var os = "unknown";
-if (isWin)
-  os = "win";
-if (isMac)
-  os = "osx";
-if (isLinux32)
-  os = "linux32";
-if (isLinux64)
-  os = "linux64";
+if (isWin) os = "win"; if (isMac) os = "osx";if (isLinux32) os = "linux32"; if (isLinux64) os = "linux64";
 
 /////////////////////////////////////////////////////////////////////////
 var exec = require("child_process").exec;
 var path = require("path");
 var currentPath = path.resolve(process.cwd(), ".");
-var nwVer = "0.10.5";
-var nwExec = "";
-if (!isMac)
-  nwExec = "cache/" + nwVer + "/" + os + "/nw.exe "+currentPath+"/../src";
-else
-  nwExec = "open -n cache/" + nwVer + "/" + os + "/node-webkit.app --args "+currentPath+"/../src";
+var nodeWebkitVersion = "0.10.5";
+var nodeWebkitExecCommand = "cache/" + nodeWebkitVersion + "/" + os + "/nw.exe "+currentPath+"/../src";
+var installExecCommand = "cd ../src && bower cache clean && bower install && npm install";
+if (isMac) {
+  nodeWebkitExecCommand = "open -n cache/" + nodeWebkitVersion + "/" + os + "/node-webkit.app --args "+currentPath+"/../src";
+  installExecCommand = "sudo launchctl limit maxfiles 100000 100000 && sudo ulimit -n 100000 && "+ installExecCommand;
+}
 
 /////////////////////////////////////////////////////////////////////////
 module.exports = function(grunt) {
@@ -47,19 +41,19 @@ module.exports = function(grunt) {
       },
       install: {
         command: function() {
-          return "sudo ulimit -n 100000 && cd ../src && bower cache clean && bower install && npm install";
+          return installExecCommand;
         }
       },
       run: {
         command: function() {
-          return nwExec;
+          return nodeWebkitExecCommand;
         }
       }
     },
     nodewebkit: {
       package: {
         options: {
-          version: nwVer,
+          version: nodeWebkitVersion,
           build_dir: "../releases",
           platforms: "<%=cfg.platforms%>",
           mac_icns: "../src/assets/img/icon.icns",
@@ -88,7 +82,7 @@ module.exports = function(grunt) {
     },
     clean: {
       options: { force: true },
-      stuff : ["../releases"],
+      stuff : ["../releases", "cache", ".sass-cache", "node_modules"],
     }
   });
 

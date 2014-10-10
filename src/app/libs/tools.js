@@ -6,11 +6,6 @@ define("tools", ["jquery", "throbber"], function($, Throbber) {
     return {
 
         ////////////////////////////////////////////////////////////////////////////////
-        init: function() {
-            $("#console").hide();
-        },
-
-        ////////////////////////////////////////////////////////////////////////////////
         info: function(title, message) {
             notifier.notify({
                 "title": title,
@@ -66,7 +61,7 @@ define("tools", ["jquery", "throbber"], function($, Throbber) {
                 }
                 $loadingElement.css({
                     position: position,
-                    "z-index": 9999
+                    "z-index": 998
                 });
 
                 function size() {

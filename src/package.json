@@ -1,7 +1,7 @@
 {
   "name": "Node-Webkit-Boilerplate",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node Webkit Boilerplate",
   "main": "index.html",
   "window": {
     "title": "Node Webkit Boilerplate",
@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "fs": "0.0.2",
+    "jsonfile": "^2.0.0",
     "node-notifier": "^4.0.2",
     "path": "^0.4.9",
     "request": "^2.45.0",
