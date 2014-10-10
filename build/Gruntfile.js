@@ -95,7 +95,7 @@ module.exports = function(grunt) {
 
   /////////////////////////////////////////////////////////////////////////
   grunt.registerTask("default", "These help instructions",["availabletasks"]);
-  grunt.registerTask("install", "Install the app",["clean", "shell:install", "nodewebkit:package"]);
+  grunt.registerTask("install", "Install the app",["shell:install", "nodewebkit:package"]);
   grunt.registerTask("package", "Package the app",["cleanup", "build", "nodewebkit:package"]);
   grunt.registerTask("run", "Run the app",["build", "shell:run"]);
   grunt.registerTask("cleanup", "Clean project",["clean"]);
