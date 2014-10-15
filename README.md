@@ -39,7 +39,7 @@ Demo app specific operations
     - Then, use with `require("the_module")` in the app code
 - Add a requirejs module from bower :
     - `cd src && bower install the_module --save`
-    - Then, add path to `js/vendor/the_module/path/to/jsFile` in `app/main.js` in path section and include module name in the `requirejs` call
+    - Then, add path to `js/libs/vendor/the_module/path/to/jsFile` in `app/main.js` in path section and include module name in the `requirejs` call
 
 Thanks
 ------

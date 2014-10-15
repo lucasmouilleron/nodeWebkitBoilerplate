@@ -1,0 +1,29 @@
+{
+  "name": "throbber.js",
+  "main": "throbber.js",
+  "version": "0.0.2",
+  "homepage": "https://github.com/aino/throbber.js",
+  "authors": [
+    "Aino <http://aino.com>"
+  ],
+  "description": "Canvas throbber",
+  "keywords": [
+    "loader",
+    "animation",
+    "spinner",
+    "throbber"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*"
+  ],
+  "_release": "0.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.2",
+    "commit": "be8c16ccfa5ddde009f8f78bbc916548be2015f7"
+  },
+  "_source": "git://github.com/aino/throbber.js.git",
+  "_target": "~0.0.2",
+  "_originalSource": "throbber.js"
+}

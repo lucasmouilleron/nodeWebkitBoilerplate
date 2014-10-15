@@ -10,13 +10,13 @@ requirejs.config({
     paths: {
         // libs
         "tools": "libs/tools",
-        "jquery": "vendor/jquery/dist/jquery",
-        "bootstrap": "vendor/bootstrap/dist/js/bootstrap.min",
-        "text": "vendor/requirejs-text/text",
-        "handlebars": "vendor/handlebars/handlebars",
-        "highcharts": "vendor/highcharts-release/highcharts-all",
-        "moment": "vendor/moment/moment",
-        "throbber": "vendor/throbber.js/throbber",
+        "jquery": "libs/vendor/jquery/dist/jquery",
+        "bootstrap": "libs/vendor/bootstrap/dist/js/bootstrap.min",
+        "text": "libs/vendor/requirejs-text/text",
+        "handlebars": "libs/vendor/handlebars/handlebars",
+        "highcharts": "libs/vendor/highcharts-release/highcharts-all",
+        "moment": "libs/vendor/moment/moment",
+        "throbber": "libs/vendor/throbber.js/throbber",
         // controllers
         "reports": "controllers/reports"
     },

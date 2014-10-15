@@ -15,7 +15,7 @@ var nodeWebkitExecCommand = "cache/" + nodeWebkitVersion + "/" + os + "/nw.exe "
 var installExecCommand = "cd ../src && bower cache clean && bower install && npm install";
 if (isMac) {
   nodeWebkitExecCommand = "open -n cache/" + nodeWebkitVersion + "/" + os + "/node-webkit.app --args "+currentPath+"/../src";
-  installExecCommand = "sudo launchctl limit maxfiles 100000 100000 && sudo ulimit -n 100000 && "+ installExecCommand;
+  installExecCommand = "sudo launchctl limit maxfiles 100000 100000 && ulimit -n 99999 && "+ installExecCommand;
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -29,7 +29,7 @@ module.exports = function(grunt) {
         options: {
           sort: true,
           filter: "include",
-          tasks: ["default","cleanup","watch","package", "build", "run"]
+          tasks: ["default","cleanup","package", "build", "run", "install"]
         }
       }
     },
@@ -63,6 +63,11 @@ module.exports = function(grunt) {
         src: ["../src/**/*"]
       },
     },
+    copyFiles: {
+      main: {
+        files: "<%=cfg.copyFiles%>"
+      }
+    },
     compass: {
       compile: {
         options: {
@@ -75,6 +80,7 @@ module.exports = function(grunt) {
           outputStyle:"compressed",
           relativeAssets:true,
           lineComments:false,
+          force:true,
           raw: "preferred_syntax = :sass\n",
           environment: "production"
         }
@@ -95,9 +101,23 @@ module.exports = function(grunt) {
 
   /////////////////////////////////////////////////////////////////////////
   grunt.registerTask("default", "These help instructions",["availabletasks"]);
-  grunt.registerTask("install", "Install the app",["shell:install", "nodewebkit:package"]);
+  grunt.registerTask("install", "Install the app",["shell:install", "nodewebkit:package", "copyFiles:main"]);
   grunt.registerTask("package", "Package the app",["install", "build", "nodewebkit:package"]);
   grunt.registerTask("run", "Run the app",["build", "shell:run"]);
   grunt.registerTask("cleanup", "Clean project",["clean"]);
   grunt.registerTask("build", "Build the app",["compass:compile"]);
+
+  /////////////////////////////////////////////////////////////////////////
+  grunt.task.registerMultiTask("copyFiles", function() {
+    var path = require("path");
+    for(file in this.data.files) {
+      var filesCopy = grunt.file.expand(file);
+      for(fileCopy in filesCopy) {
+        var from = filesCopy[fileCopy];
+        var to = path.join(this.data.files[file], path.basename(from));
+        grunt.log.ok("Copying "+from+" to "+to)
+        grunt.file.copy(from, to);
+      }
+    }
+  });
 };
