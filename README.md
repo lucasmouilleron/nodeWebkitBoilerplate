@@ -8,20 +8,20 @@ Architecture
     - `package.json` : node webkit manifest
     - `assets` : app assets (css + images)
     - `app` : logic app files
-- `build` : grunt builder
+- `_build` : grunt builder
 
 Install
 -------
 - Install NodeJS : http://nodejs.org/download
 - `sudo npm install bower -g`
 - `sudo npm install grunt -g`
-- `cd build`
+- `cd _build`
 - `npm install` : installs node modules of the builder
 - `grunt install` : installs the app dev kit (requires password on mac os to extend open files limit)
 
 Run
 ---
-- `cd build && grunt run`
+- `cd _build && grunt run`
 - Debug : 
     - Edit `package.json`
     - Change `window->toolbar` to true
@@ -29,8 +29,8 @@ Run
 
 Package
 -------
-- Config target platforms in `build/config.json` (`"platforms":["win", "osx"]`)
-- `cd build && grunt package`
+- Config target platforms in `_build/config.json` (`"platforms":["win", "osx"]`)
+- `cd _build && grunt package`
 
 Demo app specific operations
 ----------------------------
