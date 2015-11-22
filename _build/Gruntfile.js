@@ -4,7 +4,7 @@ var isMac = /^darwin/.test(process.platform);
 var isLinux32 = /^linux/.test(process.platform);
 var isLinux64 = /^linux64/.test(process.platform);
 var os = "unknown";
-if (isWin) os = "win"; if (isMac) os = "osx";if (isLinux32) os = "linux32"; if (isLinux64) os = "linux64";
+if (isWin) os = "win"; if (isMac) os = "osx32";if (isLinux32) os = "linux32"; if (isLinux64) os = "linux64";
 
 /////////////////////////////////////////////////////////////////////////
 var exec = require("child_process").exec;
