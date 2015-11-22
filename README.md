@@ -2,9 +2,7 @@ nodeWebkitBoilerplate
 =====================
 
 A NW.js boilerplate.
-
 Grunt building and packaging.
-
 The sample app is not relevant (old requirejs + angular test).
 
 ![Screenshot](http://grabs.lucasmouilleron.com/Screen%20Shot%202015-11-22%20at%2018.27.09.png)
